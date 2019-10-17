@@ -25,7 +25,7 @@ int main()
 
 int fitness(char *genome)
 {
-    struct node *root = get_last_operator(genome, 0, 0);
+    struct node *root = get_last_operator(genome, 0, gene_length(genome));
     if(root)
         printf("root: %c\n", root->data);
     return 0;

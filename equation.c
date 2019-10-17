@@ -12,5 +12,13 @@ struct node *get_last_operator(char *array, int low, int high)
         operand->right = NULL;
         return operand;
     }
+
+    int last_op_index = -1;
+    for(int i=low;i<=high;++i)
+    {
+      printf("%c", array[i]);
+
+    }
+
     return NULL;
 }
