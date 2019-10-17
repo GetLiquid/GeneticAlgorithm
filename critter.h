@@ -8,10 +8,12 @@ struct critter
 
 struct node
 {
-    uint8_t data;
+    char data;
     struct node *left;
     struct node *right;
 };
+
+struct node * get_last_operator(char *array, int low, int high);
 
 void print_critter(struct critter *);
 struct critter * crossover(struct critter*, struct critter*);

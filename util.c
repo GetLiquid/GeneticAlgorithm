@@ -87,3 +87,11 @@ char * process_gene(struct critter * in)
     }
     return raw_gene;
 }
+
+int gene_length(const char *input)
+{
+    int count = 0;
+    while(*(input + count))
+        ++count;
+    return count;
+}
