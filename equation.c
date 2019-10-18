@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "critter.h"
+#include "util.h"
 
 struct node *get_last_operator(char *array, int low, int high)
 {
@@ -13,11 +14,13 @@ struct node *get_last_operator(char *array, int low, int high)
         return operand;
     }
 
-    int last_op_index = -1;
+    int last_op_index = low;
     for(int i=low;i<=high;++i)
     {
-      printf("%c", array[i]);
+        if(is_operator(aray[i]) && op_omes_after(array[i], array[last_op_index]))
+        {
 
+        }
     }
 
     return NULL;

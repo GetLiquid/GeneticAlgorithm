@@ -95,3 +95,13 @@ int gene_length(const char *input)
         ++count;
     return count;
 }
+
+
+int op_comes_after(char a, char b)
+{
+    int a_index = 0;
+    int b_index = 0;
+    for(int i=0;i<4;++i)
+    {}
+}
+
