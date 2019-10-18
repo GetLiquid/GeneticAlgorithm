@@ -17,11 +17,17 @@ struct node *get_last_operator(char *array, int low, int high)
     int last_op_index = low;
     for(int i=low;i<=high;++i)
     {
-        if(is_operator(aray[i]) && op_omes_after(array[i], array[last_op_index]))
+        if(op_comes_after(array[last_op_index], array[i]))
         {
-
+            last_op_index = i;
         }
     }
+    printf("%c", array[last_op_index]);
 
-    return NULL;
+    struct node *op_node;
+    op_node->data = array[last_op_index];
+    op_node->left = get_last_operator(array, 0, last_op_index - 1);
+    op_node->right =get_last_operator(array, last_op_index+1, high);
+
+    return op_node;
 }

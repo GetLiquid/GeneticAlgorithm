@@ -99,9 +99,21 @@ int gene_length(const char *input)
 
 int op_comes_after(char a, char b)
 {
+    if(b == '-')
+        return 1;
+    if(!is_operator(a))
+        return 1;
+
+    char operators[] = {'*', '/', '+', '-'};
     int a_index = 0;
     int b_index = 0;
     for(int i=0;i<4;++i)
-    {}
+    {
+        if(a == operators[i])
+            a_index = i;
+        if(b == operators[i])
+            b_index = i;
+    }
+    return b_index > a_index;
 }
 
