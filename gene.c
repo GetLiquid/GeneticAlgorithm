@@ -23,10 +23,52 @@ int main()
     return 0;
 }
 
+void print_tree(struct node *root)
+{
+  if(!root)
+    return;
+
+  printf("Node: %c\n", root->data);
+  print_tree(root->left);
+  print_tree(root->right);
+
+}
+
+int sum_tree(struct node *root)
+{
+  if(!root)
+    return 0;
+
+  if(!(root->left) && !(root->right))
+    return root->data - '0';
+
+  if(root->left && root->right)
+  {
+    switch(root->data)
+    {
+      case '+':
+        printf("Add: ");
+        return sum_tree(root->left) + sum_tree(root->right);
+      case '-':
+        printf("Subtract: ");
+        return sum_tree(root->left) - sum_tree(root->right);
+      case '*':
+        printf("Mult: ");
+        return sum_tree(root->left) * sum_tree(root->right);
+      case '/':
+        printf("Div: ");
+        return sum_tree(root->left) / sum_tree(root->right);
+      default:
+        return 0;
+    }
+  }
+
+}
+
 int fitness(char *genome)
 {
-    struct node *root = get_last_operator(genome, 0, gene_length(genome));
-    if(root)
-        printf("root: %c\n", root->data);
+    struct node *root = get_last_operator(genome, 0, gene_length(genome)-1);
+    //print_tree(root);
+    printf("Sum: %d\n", sum_tree(root));
     return 0;
 }

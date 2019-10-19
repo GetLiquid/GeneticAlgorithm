@@ -97,12 +97,17 @@ int gene_length(const char *input)
 }
 
 
-int op_comes_after(char a, char b)
+int op_comes_after(char a, char b) //returns 1 if b comes after a
 {
-    if(b == '-')
+    /*if(b == '-')
         return 1;
+    */
     if(!is_operator(a))
         return 1;
+    if(a == '*')
+      a = '/';
+    if(b == '*')
+      b = '/';
 
     char operators[] = {'*', '/', '+', '-'};
     int a_index = 0;
