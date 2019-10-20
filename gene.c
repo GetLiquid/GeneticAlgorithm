@@ -5,70 +5,58 @@
 #include "critter.h"
 #include "util.h"
 
-int fitness(char *genome);
+float fitness(char *genome);
+float sum_tree(struct node *root);
 
 int main()
 {
     srand(time(NULL)*getpid());
 
-    struct critter * crit_one = new_critter();
-    struct critter * crit_two = new_critter();
-
-    struct critter * crit_three = crossover(crit_one, crit_two);
-    print_critter(crit_three);
-    printf("%s\n", process_gene(crit_three));
-    fitness(process_gene(crit_three));
-    printf("\n");
+    //char *gene = "9+4/3-4";
+    struct critter *a = new_critter();
+    char *a_gene = process_gene(a);
+    printf("Equation: %s\nFitness: %f\n", a_gene, fitness(a_gene));
 
     return 0;
 }
 
-void print_tree(struct node *root)
+
+float sum_tree(struct node *root)
 {
-  if(!root)
-    return;
+    if(!root)
+        return 0;
 
-  printf("Node: %c\n", root->data);
-  print_tree(root->left);
-  print_tree(root->right);
-
-}
-
-int sum_tree(struct node *root)
-{
-  if(!root)
-    return 0;
-
-  if(!(root->left) && !(root->right))
-    return root->data - '0';
-
-  int temp_return;
-  switch(root->data)
-  {
-    case '+':
-        temp_return = sum_tree(root->left) + sum_tree(root->right);
-        printf("Operator %c returning %d\n", root->data, temp_return);
-        return temp_return;
-    case '-':
-        temp_return = sum_tree(root->left) - sum_tree(root->right);
-        printf("Operator %c returning %d\n", root->data, temp_return);
-        return temp_return;
-    case '*':
-        temp_return = sum_tree(root->left) * sum_tree(root->right);
-        printf("Operator %c returning %d\n", root->data, temp_return);
-        return temp_return;
-    case '/':
-        temp_return = sum_tree(root->left) / sum_tree(root->right);
-        printf("Operator %c returning %d\n", root->data, temp_return);
-        return temp_return;
-    default:
+    if(!root->left || !root->right)
         return root->data - '0';
-  }
+
+    float left_temp = sum_tree(root->left);
+    float right_temp = sum_tree(root->right);
+    float sum = 0;
+
+    switch(root->data)
+    {
+        case '+':
+            sum = left_temp + right_temp;
+            break;
+        case '-':
+            sum = left_temp - right_temp;
+            break;
+        case 'x':
+            sum = left_temp * right_temp;
+            break;
+        case '/':
+            sum = left_temp / right_temp;
+            break;
+        defualt:
+            break;
+    }
+
+    return sum;
 }
 
-int fitness(char *genome)
+float fitness(char *genome)
 {
     struct node *root = get_last_operator(genome, 0, gene_length(genome)-1);
-    printf("Sum: %d\n", sum_tree(root));
-    return 0;
+    print_tree(root);
+    return sum_tree(root);
 }

@@ -3,6 +3,31 @@
 #include "critter.h"
 #include "util.h"
 
+void print_tree(struct node *root)
+{
+    if(!root)
+        return;
+    print_tree_layer(root, 0);
+
+}
+
+void print_tree_layer(struct node *root, int layer)
+{
+    if(!root)
+        return;
+
+    printf("%d. ", layer);
+    for(int i=0;i<layer;++i)
+    {
+        printf(" ");
+    }
+    printf("Node %c\n", root->data);
+    print_tree_layer(root->left, layer+1);
+    print_tree_layer(root->right, layer+1);
+
+}
+    
+
 struct node *get_last_operator(char *array, int low, int high)
 {
     if((high - low) == 0)
