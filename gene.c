@@ -42,33 +42,33 @@ int sum_tree(struct node *root)
   if(!(root->left) && !(root->right))
     return root->data - '0';
 
-  if(root->left && root->right)
+  int temp_return;
+  switch(root->data)
   {
-    switch(root->data)
-    {
-      case '+':
-        printf("Add: ");
-        return sum_tree(root->left) + sum_tree(root->right);
-      case '-':
-        printf("Subtract: ");
-        return sum_tree(root->left) - sum_tree(root->right);
-      case '*':
-        printf("Mult: ");
-        return sum_tree(root->left) * sum_tree(root->right);
-      case '/':
-        printf("Div: ");
-        return sum_tree(root->left) / sum_tree(root->right);
-      default:
-        return 0;
-    }
+    case '+':
+        temp_return = sum_tree(root->left) + sum_tree(root->right);
+        printf("Operator %c returning %d\n", root->data, temp_return);
+        return temp_return;
+    case '-':
+        temp_return = sum_tree(root->left) - sum_tree(root->right);
+        printf("Operator %c returning %d\n", root->data, temp_return);
+        return temp_return;
+    case '*':
+        temp_return = sum_tree(root->left) * sum_tree(root->right);
+        printf("Operator %c returning %d\n", root->data, temp_return);
+        return temp_return;
+    case '/':
+        temp_return = sum_tree(root->left) / sum_tree(root->right);
+        printf("Operator %c returning %d\n", root->data, temp_return);
+        return temp_return;
+    default:
+        return root->data - '0';
   }
-
 }
 
 int fitness(char *genome)
 {
     struct node *root = get_last_operator(genome, 0, gene_length(genome)-1);
-    //print_tree(root);
     printf("Sum: %d\n", sum_tree(root));
     return 0;
 }

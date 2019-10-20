@@ -21,7 +21,6 @@ struct node *get_last_operator(char *array, int low, int high)
             last_op_index = i;
     }
 
-    //printf("Node: %c, last_op_inded: %d, low: %d, high: %d\n", array[last_op_index], last_op_index, low, high);
     struct node *op_node = malloc(sizeof(struct node));
     op_node->data = array[last_op_index];
     op_node->left = get_last_operator(array, low, last_op_index - 1);
