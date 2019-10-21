@@ -1,6 +1,6 @@
-void print_bitset(uint64_t);
-int gene_length(const char *);
-int op_comes_after(char, char);
+#include <stdint.h>
 
-void print_tree(struct node *);
-void print_tree_layer(struct node *, int); 
+int is_number(char);
+int is_operator(char);
+void print_bitset(uint64_t);
+int str_length(const char*);
