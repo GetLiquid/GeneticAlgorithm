@@ -36,6 +36,9 @@ struct critter * crossover(struct critter *a, struct critter *b)
 
 void print_critter(struct critter *crit)
 {
+    if(!crit)
+      return;
+
     printf("Critter %c: ", crit->id);
     print_bitset(crit->gene);
     printf("\n");

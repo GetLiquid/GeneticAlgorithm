@@ -23,7 +23,8 @@ int main()
     struct critter *gold = NULL;
     struct critter *silv = NULL;
 
-    while(1)
+    int a = 1;
+    while(a)
     {
         struct critter * temp[8];
         int index = 0;
@@ -37,7 +38,7 @@ int main()
             if(temp[i])
                 print_critter(temp[i]);
         }
-
+        a = 0;
     }
     
     return 0;
