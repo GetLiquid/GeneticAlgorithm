@@ -14,28 +14,31 @@ int main()
 {
     srand(time(NULL)*getpid());
 
-    struct critter * gold = NULL;
-    struct critter * silver = NULL;
-    float gold_fit = 0.0;
-    float silv_fit = 0.0;
-
-    struct critter * generation[8];
+    struct critter *population[8];
     for(int i=0;i<8;++i)
     {
-        generation[i] = new_critter();
-        print_critter(generation[i]);
+        population[i] = new_critter();
     }
 
-    printf("\n");
+    struct critter *gold = NULL;
+    struct critter *silv = NULL;
 
-    gold = generation[0];
-    silver = generation[0];
-    for(int i=0;i<4;++i)
+    while(1)
     {
-        struct critter *new_crit = crossover(generation[i], generation[2*i+4]);
-        print_critter(new_crit);
+        struct critter * temp[8];
+        int index = 0;
+        for(int i=0;i<4;++i)
+        {
+            temp[index] = crossover(population[i], population[i+4]);
+        }
+
+        for(int i=0;i<8;++i)
+        {
+            if(temp[i])
+                print_critter(temp[i]);
+        }
+
     }
-
-
+    
     return 0;
 }
