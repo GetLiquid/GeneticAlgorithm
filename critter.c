@@ -95,9 +95,9 @@ char * process_gene(uint64_t bitset)
     return raw_gene;
 }
 
-float fitness(char *genome)
+float sum_gene(char *genome)
 {
     struct node *root = build_tree(genome, 0, str_length(genome)-1);
-    print_tree(root);
+    //print_tree(root);
     return sum_tree(root);
 }

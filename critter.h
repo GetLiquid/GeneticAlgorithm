@@ -13,4 +13,4 @@ void print_critter(struct critter*);
 
 char * process_gene(uint64_t);
 
-float fitness(char *);
+float sum_gene(char *);
