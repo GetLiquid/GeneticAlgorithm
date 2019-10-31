@@ -14,32 +14,24 @@ int main()
 {
     srand(time(NULL)*getpid());
 
-    struct critter *population[8];
+    struct critter population[8];
     for(int i=0;i<8;++i)
     {
-        population[i] = new_critter();
+        population[i].id = 'A' +  (rand()%52);
+        population[i].gene = rand();
+        population[i].gene |= (uint64_t)rand() << 32;
+
+        printf("%d\n", fitness());
     }
 
-    struct critter *gold = NULL;
-    struct critter *silv = NULL;
+    quicksort(population, 0, 7);
 
-    int a = 1;
-    while(a)
+    for(int i=0;i<8;++i)
     {
-        struct critter * temp[8];
-        int index = 0;
-        for(int i=0;i<4;++i)
-        {
-            temp[index] = crossover(population[i], population[i+4]);
-        }
-
-        for(int i=0;i<8;++i)
-        {
-            if(temp[i])
-                print_critter(temp[i]);
-        }
-        a = 0;
+        print_critter(population+i);
     }
+
+
     
     return 0;
 }
