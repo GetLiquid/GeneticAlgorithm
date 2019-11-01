@@ -3,12 +3,8 @@
 #include <time.h>
 #include <unistd.h>
 #include <math.h>
-#include "tree.h"
 #include "util.h"
 #include "critter.h"
-
-float fitness(char *genome);
-float sum_tree(struct node *root);
 
 int main()
 {
@@ -21,14 +17,15 @@ int main()
         population[i].gene = rand();
         population[i].gene |= (uint64_t)rand() << 32;
 
-        printf("%d\n", fitness());
+        printf("%.2f\n", fitness(population[i].gene));
     }
 
+    printf("----------\n");
     quicksort(population, 0, 7);
 
     for(int i=0;i<8;++i)
     {
-        print_critter(population+i);
+        printf("%.2f\n", fitness(population[i].gene));
     }
 
 

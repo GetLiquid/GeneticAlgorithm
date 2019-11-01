@@ -1,17 +1,11 @@
 #include "critter.h"
+#include "util.h"
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-int is_number(char c)
-{
-    return c >= '0' && c <= '9';
-}
-
-int is_operator(char c)
-{
-    return (c == '+') || (c == '-') || (c == 'x') || (c == '/');
-}
+int is_number(char c) {return c >= '0' && c <= '9';}
+int is_operator(char c) {return (c == '+') || (c == '-') || (c == 'x') || (c == '/');}
 
 void print_bitset(uint64_t in)
 {
@@ -58,30 +52,10 @@ struct critter * copy_critter(struct critter *from)
     return to;
 }
 
-int partition(struct critter *A, int low, int high)
+float fitness(uint64_t gene)
 {
-    struct critter *x = copy_critter(A+high);
-    int i = low - 1;
-    for(int j=low;j<high-1;++j)
-    {
-        if(A[i].gene < x->gene)
-        {
-            ++i;
-            //exchange A[i] and A[j]
-            exchange_critter(A+i, A+j);
-        }
-    }
-    //exchange A[i+1] and A[high]
-    exchange_critter(A+i+1, A+high);
-    return i+1;
+    char * process = process_gene(gene);
+    struct node *root = build_tree(process, 0, str_length(process) - 1);
+    return sum_tree(root);
 }
 
-void quicksort(struct critter *A, int low, int high)
-{
-    if(low < high)
-    {
-        int mid = partition(A, low, high);
-        quicksort(A, low, mid - 1);
-        quicksort(A, mid + 1, high);
-    }
-}

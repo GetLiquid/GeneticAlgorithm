@@ -2,11 +2,6 @@
 #include <stdio.h>
 #include "util.h"
 #include "critter.h"
-#include "tree.h"
-
-#ifndef CRITTER
-#define CRITTER
-#endif
 
 struct critter * new_critter()
 {
