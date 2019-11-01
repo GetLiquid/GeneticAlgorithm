@@ -10,7 +10,7 @@ int main()
 {
     srand(time(NULL)*getpid());
 
-    struct critter population[8];
+    /*struct critter population[8];
     for(int i=0;i<8;++i)
     {
         population[i].id = 'A' +  (rand()%52);
@@ -26,9 +26,7 @@ int main()
     for(int i=0;i<8;++i)
     {
         printf("%.2f\n", fitness(population[i].gene));
-    }
-
-
-    
+    }*/
+    printf("%lu\n", sizeof(struct node));
     return 0;
 }

@@ -3,10 +3,10 @@
 #include "critter.h"
 
 //Generic helper functions
-int is_number(char);
-int is_operator(char);
-void print_bitset(uint64_t);
-int str_length(const char*);
+int is_number(char);           //returns 1 if char input is a numeric
+int is_operator(char);         //returns 1 if the char input is '+', '-', '*' or '/'
+void print_bitset(uint64_t);   //prints a 64 bit set in binary 4-bit chunks 
+int str_length(const char*);   //returns the length of a c-style string
 
 //Fitness function
 float fitness(uint64_t gene);
@@ -20,11 +20,11 @@ struct node
 };
 
 //Declarations of expression tree-related functions
-float sum_tree(struct node*);
-int operator_comes_after(char, char);
-void print_tree(struct node *);
-void print_tree_layer(struct node *, int);
-struct node *build_tree(char*, int, int);
+float sum_tree(struct node*);                   //Computes the sum of the an expression tree
+int operator_comes_after(char A, char B);       //Returns 1 if B comes after A
+void print_tree(struct node * tree);            //Prints all nodes in the provided tree
+void print_tree_layer(struct node *tree, int);  //Prints the layer
+struct node *build_tree(char*, int, int);       //Builds an expression tree from an array of characters
 
 //Helper functions for struct critter
 struct critter *copy_critter(struct critter *from);
