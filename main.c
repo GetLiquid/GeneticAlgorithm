@@ -21,15 +21,21 @@ int main()
         printf("%.2f\n", fitness(population[i].gene));
     }
 
-    printf("\nThe population sorted by fitness in descending order:\n");
+    printf("\nTop 4 creatures this generation by fitness in descending order:\n");
     merge_sort(population, 0, 7, 8);
 
 
-    for(int i=0;i<8;++i)
+    int  i = 0;
+    int  count = 0;
+    while(i < 8 && count < 4)
     {
-        printf("%.2f\n", fitness(population[i].gene));
+        if(fitness(population[i].gene) != INFINITY)
+        {
+            printf("%.2f\n", fitness(population[i].gene));
+            ++count;
+        }
+        ++i;
     }
-
 
     return 0;
 }
