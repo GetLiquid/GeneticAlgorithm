@@ -31,5 +31,5 @@ struct critter *copy_critter(struct critter *from);
 void exchange_critter(struct critter* A, struct critter* B);
 
 //Declarations for sorting functions
-int partition(struct critter*  A, int low, int high);
-void quicksort(struct critter* A, int low, int high);
+void merge(struct critter *A, int low, int mid, int high, int length);
+void merge_sort(struct critter *A, int low, int high, int length);
