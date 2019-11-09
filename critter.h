@@ -5,6 +5,8 @@ struct critter
 {
     char id;
     uint64_t gene;
+    float fitness;
+    char sequenced_gene[16];
 };
 
 struct critter * new_critter();

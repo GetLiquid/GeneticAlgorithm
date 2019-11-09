@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 int is_number(char c) {return c >= '0' && c <= '9';}
 int is_operator(char c) {return (c == '+') || (c == '-') || (c == 'x') || (c == '/');}
@@ -56,6 +57,12 @@ float fitness(uint64_t gene)
 {
     char * process = process_gene(gene);
     struct node *root = build_tree(process, 0, str_length(process) - 1);
-    return sum_tree(root);
+    return 1 / (42 - sum_tree(root));
+}
+
+float fitness_char(char *gene)
+{
+    struct node *root = build_tree(gene, 0, str_length(gene)-1);
+    return 1 / (42 - sum_tree(root));
 }
 

@@ -2,14 +2,14 @@
 #include "util.h"
 
 
-void merge(struct critter *A, int low, int mid, int high, int length)
+void merge(struct critter **A, int low, int mid, int high, int length)
 {
     int l1,l2,i;
-    struct critter temp[length];
+    struct critter * temp[length];
 
     for(l1=low,l2=mid+1,i=low;l1 <= mid && l2 <= high; ++i)
     {
-        if(fitness(A[l1].gene) >= fitness(A[l2].gene))
+        if(fitness(A[l1]->gene) > fitness(A[l2]->gene))
             temp[i] = A[l1++];
         else
             temp[i] = A[l2++];
@@ -23,7 +23,7 @@ void merge(struct critter *A, int low, int mid, int high, int length)
         A[i] = temp[i];
 }
 
-void merge_sort(struct critter *A, int low, int high, int length)
+void merge_sort(struct critter **A, int low, int high, int length)
 {
     if(low < high)
     {

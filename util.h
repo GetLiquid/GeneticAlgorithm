@@ -10,6 +10,7 @@ int str_length(const char*);   //returns the length of a c-style string
 
 //Fitness function
 float fitness(uint64_t gene);
+float fitness_char(char *gene);
 
 //Node data type for expression tree
 struct node
@@ -31,5 +32,5 @@ struct critter *copy_critter(struct critter *from);
 void exchange_critter(struct critter* A, struct critter* B);
 
 //Declarations for sorting functions
-void merge(struct critter *A, int low, int mid, int high, int length);
-void merge_sort(struct critter *A, int low, int high, int length);
+void merge(struct critter **A, int low, int mid, int high, int length);
+void merge_sort(struct critter **A, int low, int high, int length);
