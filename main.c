@@ -12,45 +12,41 @@ int main()
 {
     srand(time(NULL)*getpid());
 
-    /*struct critter population[8];
-    printf("8 randomly generated critters:\n");
-    for(int i=0;i<8;++i)
-    {
-        population[i].id = 'A' +  (rand()%52);
-        population[i].gene = rand();
-        population[i].gene |= (uint64_t)rand() << 32;
-        population[i].fitness = fitness(population[i].gene);
 
-        printf("%.2f\n", population[i].fitness);
-    }
+    /* 1. Create an initial, random population of critters */
 
-    printf("\nTop 5 creatures this generation by fitness in descending order:\n");
-    merge_sort(population, 0, 7, 8);
-
-
-    int  i = 0;
-    int  count = 0;
-    while(i < 8 && count < 5)
-    {
-        if(fitness(population[i].gene) != INFINITY)
-        {
-            printf("%.2f\n", population[i].fitness);
-            ++count;
-        }
-        ++i;
-    }
-*/
+    printf("initial generation (size %d):\n", POPULATION_SIZE);
     struct critter **population = malloc(sizeof(struct critter *) * POPULATION_SIZE);
     for(int i=0;i<POPULATION_SIZE;++i)
     {
         population[i] = new_critter();
         print_critter(population[i]);
     }
-    merge_sort(population, 0, POPULATION_SIZE-1, POPULATION_SIZE);
-    printf("\n");
+
+    /* 2. Crossover the genomes of each critter with each other*/
+
+    printf("offspring (size %d):\n", POPULATION_SIZE * POPULATION_SIZE);
+
+    //array of critters of size POPULATION_SIZE^2 to accomodate all possible offspring
+    struct critter **generation = malloc(sizeof(struct critter *) * POPULATION_SIZE * POPULATION_SIZE);
+    
     for(int i=0;i<POPULATION_SIZE;++i)
     {
-        print_critter(population[i]);
+    	for (int j = 0; j < POPULATION_SIZE; ++j)
+    	{
+    		//breed population[i] with population[j] and store in generation
+    		generation[j * POPULATION_SIZE + i] = crossover(population[i], population[j]);
+    		print_critter(generation[i]);
+    	}
+    }
+
+    /* 3. Sort the offspring by fitness and choose the POPULATION_SIZE best genomes to be bred again */
+
+	merge_sort(generation, 0, POPULATION_SIZE - 1, POPULATION_SIZE);
+    printf("best in generation (size %d): \n", POPULATION_SIZE * POPULATION_SIZE);
+    for(int i=0; i < (POPULATION_SIZE * POPULATION_SIZE) ;++i)
+    {;
+        print_critter(generation[i]);
     }
 
 
