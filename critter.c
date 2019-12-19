@@ -37,8 +37,11 @@ struct critter * crossover(struct critter *a, struct critter *b, int target)
     c->gene &= swap_index;
     c->gene |= (~swap_index & b->gene);
 
-    uint64_t mutate = 1 << (rand()%63);
-    c->gene ^= mutate;
+    //if((rand()%100) == 0)
+    //{
+        uint64_t mutate = 1 << (rand()%32);
+        c->gene ^= mutate;
+    //}
 
     c->fitness = fitness(c->gene, target);
     char *temp = process_gene(c->gene);
@@ -61,7 +64,7 @@ void print_critter(struct critter *crit)
     print_bitset(crit->gene);
     int blanks = 16 - str_length(crit->sequenced_gene);
 
-    printf(" (%s) Fitness: %.3f\n", crit->sequenced_gene, crit->fitness);
+    printf(" (%s) Fitness: %.3f", crit->sequenced_gene, crit->fitness);
 }
 
 char * process_gene(uint64_t bitset)

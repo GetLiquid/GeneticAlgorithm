@@ -19,10 +19,8 @@ int main(int argc, char **argv)
     {
          scanf("%d", &sum_target);
     }
-
     
     srand(time(NULL)*getpid());
-
 
     /* 1. Create an initial, random population of critters */
 
@@ -32,8 +30,10 @@ int main(int argc, char **argv)
     {
         population[i] = new_critter(sum_target);
         print_critter(population[i]);
+        printf("\n");
     }
     
+    int generation_count = 1;
     do
     {
       /* 2. Crossover the genomes of each critter with each other*/
@@ -54,11 +54,11 @@ int main(int argc, char **argv)
       /* 3. Sort the offspring by fitness to choose the POPULATION_SIZE best genomes to be bred again */
 
       merge_sort(generation, 0, POPULATION_SIZE * POPULATION_SIZE - 1, POPULATION_SIZE * POPULATION_SIZE);
-      printf("best in generation (size %d): \n", POPULATION_SIZE * POPULATION_SIZE);
+      /*printf("best in generation (size %d): \n", POPULATION_SIZE * POPULATION_SIZE);
       for(int i=0; i < POPULATION_SIZE;++i)
       {
           print_critter(generation[i]);
-      }
+      }*/
 
 
       /* 4. The fittest offspring become the parents of the next generation */
@@ -73,11 +73,17 @@ int main(int argc, char **argv)
         free(generation[i]);
       }
 
+      ++generation_count;
+      printf("\n Best of generation %d | ", generation_count);
+      print_critter(generation[0]);
+
+    /* Repeat the breeding process until the program reaches the target sum */
+
     } while(population[0]->fitness < INFINITY);
 
     char * process = process_gene(population[0]->gene);
     struct node *root = build_tree(process, 0, str_length(process) - 1);
-    printf("Equation: %s, Sum: %.1f, Target: %d\n", process_gene(population[0]->gene), sum_tree(root), sum_target);
+    printf("\nFound in %d generations\nEquation: %s, Sum: %.1f, Target: %d\n", generation_count, process_gene(population[0]->gene), sum_tree(root), sum_target);
 
 
     return 0;
