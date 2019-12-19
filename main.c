@@ -17,10 +17,12 @@ int main(int argc, char **argv)
         sum_target = atoi(argv[1]);
     } else
     {
-         scanf("%d", &sum_target);
+        printf("Target: ");
+        scanf("%d", &sum_target);
     }
     
-    srand(time(NULL)*getpid());
+    uint64_t seed = time(NULL)*getpid();
+    srand(seed);
 
     /* 1. Create an initial, random population of critters */
 
@@ -74,6 +76,7 @@ int main(int argc, char **argv)
       }
 
       ++generation_count;
+      ++seed;
       printf("\n Best of generation %d | ", generation_count);
       print_critter(generation[0]);
 
