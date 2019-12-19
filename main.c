@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include <time.h>
 #include <unistd.h>
 #include <math.h>
@@ -8,9 +9,17 @@
 
 const int POPULATION_SIZE = 8;
 
-int main()
+int main(int argc, char **argv)
 {
-    int sum_target = 10;
+    int sum_target = 0;
+    if(argc > 1)
+    {
+        sum_target = atoi(argv[1]);
+    } else
+    {
+         scanf("%d", &sum_target);
+    }
+
     
     srand(time(NULL)*getpid());
 
@@ -68,7 +77,7 @@ int main()
 
     char * process = process_gene(population[0]->gene);
     struct node *root = build_tree(process, 0, str_length(process) - 1);
-    printf("Equation: %s, Sum: %d, Target: %d\n", process_gene(population[0]->gene), sum_tree(root), sum_target);
+    printf("Equation: %s, Sum: %.1f, Target: %d\n", process_gene(population[0]->gene), sum_tree(root), sum_target);
 
 
     return 0;
