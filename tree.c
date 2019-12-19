@@ -85,7 +85,7 @@ void print_tree_layer(struct node *root, int layer)
 
 struct node *build_tree(char *array, int low, int high)
 {
-    if((high - low) == 0)
+    if((high - low) <= 0)
     {
         struct node * operand_node = malloc(sizeof(struct node));
         operand_node->data = array[low];

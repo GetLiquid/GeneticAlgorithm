@@ -7,6 +7,7 @@
 #include "critter.h"
 
 const int POPULATION_SIZE = 8;
+const int TARGET = 42;
 
 int main()
 {
@@ -63,6 +64,9 @@ int main()
       }
 
     } while(population[0]->fitness < INFINITY);
+
+
+    printf("Equation: %s, Sum: 42\n", process_gene(population[0]->gene));
 
 
     return 0;

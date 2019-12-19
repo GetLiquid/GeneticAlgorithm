@@ -21,7 +21,7 @@ struct critter * new_critter()
     return out;
 }
 
-struct critter * crossover(struct critter *a, struct critter *b)
+struct critter * crossover(struct critter *a, struct critter *b, int target)
 {
     struct critter *c = malloc(sizeof(struct critter));
     
@@ -37,7 +37,7 @@ struct critter * crossover(struct critter *a, struct critter *b)
     c->gene &= swap_index;
     c->gene |= (~swap_index & b->gene);
 
-    uint64_t mutate = 1 << rand()%63;
+    uint64_t mutate = 1 << (rand()%63);
     c->gene ^= mutate;
 
     c->fitness = fitness(c->gene);
