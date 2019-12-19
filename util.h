@@ -9,8 +9,8 @@ void print_bitset(uint64_t);   //prints a 64 bit set in binary 4-bit chunks
 int str_length(const char*);   //returns the length of a c-style string
 
 //Fitness function
-float fitness(uint64_t gene);
-float fitness_char(char *gene);
+float fitness(uint64_t gene, int target);
+float fitness_char(char *gene, int target);
 
 //Node data type for expression tree
 struct node

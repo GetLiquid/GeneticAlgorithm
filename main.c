@@ -7,10 +7,11 @@
 #include "critter.h"
 
 const int POPULATION_SIZE = 8;
-const int TARGET = 42;
 
 int main()
 {
+    int sum_target = 10;
+    
     srand(time(NULL)*getpid());
 
 
@@ -20,7 +21,7 @@ int main()
     struct critter **population = malloc(sizeof(struct critter *) * POPULATION_SIZE);
     for(int i=0;i<POPULATION_SIZE;++i)
     {
-        population[i] = new_critter();
+        population[i] = new_critter(sum_target);
         print_critter(population[i]);
     }
     
@@ -36,7 +37,7 @@ int main()
         for (int j = 0; j < POPULATION_SIZE; ++j)
         {
           //breed population[i] with population[j] and store in generation
-          generation[i * POPULATION_SIZE + j] = crossover(population[i], population[j]);
+          generation[i * POPULATION_SIZE + j] = crossover(population[i], population[j], sum_target);
           //print_critter(generation[i*POPULATION_SIZE+j]);
         }
       }
@@ -65,8 +66,9 @@ int main()
 
     } while(population[0]->fitness < INFINITY);
 
-
-    printf("Equation: %s, Sum: 42\n", process_gene(population[0]->gene));
+    char * process = process_gene(population[0]->gene);
+    struct node *root = build_tree(process, 0, str_length(process) - 1);
+    printf("Equation: %s, Sum: %d, Target: %d\n", process_gene(population[0]->gene), sum_tree(root), sum_target);
 
 
     return 0;

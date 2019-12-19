@@ -3,14 +3,14 @@
 #include "util.h"
 #include "critter.h"
 
-struct critter * new_critter()
+struct critter * new_critter(int target)
 {
     struct critter *out = malloc(sizeof(struct critter));
 
     out->id = 'A' +  (rand()%52);
     out->gene = rand();
     out->gene |= (uint64_t)rand() << 32;
-    out->fitness = fitness(out->gene);
+    out->fitness = fitness(out->gene, target);
     char *temp = process_gene(out->gene);
     for(int i=0;i<16;++i)
     {
@@ -40,7 +40,7 @@ struct critter * crossover(struct critter *a, struct critter *b, int target)
     uint64_t mutate = 1 << (rand()%63);
     c->gene ^= mutate;
 
-    c->fitness = fitness(c->gene);
+    c->fitness = fitness(c->gene, target);
     char *temp = process_gene(c->gene);
     for(int i=0;i<16;++i)
     {

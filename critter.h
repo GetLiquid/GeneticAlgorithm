@@ -9,8 +9,8 @@ struct critter
     char sequenced_gene[16];
 };
 
-struct critter * new_critter();
-struct critter * crossover();
+struct critter * new_critter(int target);
+struct critter * crossover(struct critter * a, struct critter * b, int target);
 
 void print_critter(struct critter*);
 

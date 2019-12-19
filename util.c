@@ -53,16 +53,16 @@ struct critter * copy_critter(struct critter *from)
     return to;
 }
 
-float fitness(uint64_t gene)
+float fitness(uint64_t gene, int target)
 {
     char * process = process_gene(gene);
     struct node *root = build_tree(process, 0, str_length(process) - 1);
-    return 1 / (42 - sum_tree(root));
+    return 1 / (target - sum_tree(root));
 }
 
-float fitness_char(char *gene)
+float fitness_char(char *gene, int target)
 {
     struct node *root = build_tree(gene, 0, str_length(gene)-1);
-    return 1 / (42 - sum_tree(root));
+    return 1 / (target - sum_tree(root));
 }
 
