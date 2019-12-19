@@ -57,12 +57,17 @@ float fitness(uint64_t gene, int target)
 {
     char * process = process_gene(gene);
     struct node *root = build_tree(process, 0, str_length(process) - 1);
-    return 1 / (target - sum_tree(root));
+    float tree_sum = sum_tree(root);
+    delete_tree(root);
+    free(process);
+    return 1 / (target - tree_sum);
 }
 
 float fitness_char(char *gene, int target)
 {
     struct node *root = build_tree(gene, 0, str_length(gene)-1);
+    float tree_sum = sum_tree(root);
+    delete_tree(root);
     return 1 / (target - sum_tree(root));
 }
 

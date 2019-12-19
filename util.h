@@ -25,7 +25,8 @@ float sum_tree(struct node*);                   //Computes the sum of the an exp
 int operator_comes_after(char A, char B);       //Returns 1 if B comes after A
 void print_tree(struct node * tree);            //Prints all nodes in the provided tree
 void print_tree_layer(struct node *tree, int);  //Prints the layer
-struct node *build_tree(char*, int, int);       //Builds an expression tree from an array of characters
+struct node *build_tree(const char*, int, int);       //Builds an expression tree from an array of characters
+void delete_tree(struct node *);                //Free memory associated with a tree
 
 //Helper functions for struct critter
 struct critter *copy_critter(struct critter *from);

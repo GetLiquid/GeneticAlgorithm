@@ -64,7 +64,7 @@ void print_critter(struct critter *crit)
     print_bitset(crit->gene);
     int blanks = 16 - str_length(crit->sequenced_gene);
 
-    printf(" (%s) Fitness: %.3f", crit->sequenced_gene, crit->fitness);
+    printf(" (%s) Fitness: %.10f", crit->sequenced_gene, crit->fitness);
 }
 
 char * process_gene(uint64_t bitset)

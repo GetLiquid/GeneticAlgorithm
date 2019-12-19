@@ -83,7 +83,7 @@ void print_tree_layer(struct node *root, int layer)
 }
     
 
-struct node *build_tree(char *array, int low, int high)
+struct node *build_tree(const char *array, int low, int high)
 {
     if((high - low) <= 0)
     {
@@ -106,4 +106,21 @@ struct node *build_tree(char *array, int low, int high)
     op_node->left  = build_tree(array, low, last_op_index - 1);
     op_node->right = build_tree(array, last_op_index+1, high);
     return op_node;
+}
+
+void delete_tree(struct node *root)
+{
+    if(root->left)
+    {
+        delete_tree(root->left);
+        root->left = NULL;
+    }
+
+    if(root->right)
+    {
+        delete_tree(root->right);
+        root->right = NULL;
+    }
+
+    free(root);
 }

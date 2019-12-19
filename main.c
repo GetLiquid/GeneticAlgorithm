@@ -23,6 +23,8 @@ int main(int argc, char **argv)
     
     uint64_t seed = time(NULL)*getpid();
     srand(seed);
+    
+    clock_t start, end;
 
     /* 1. Create an initial, random population of critters */
 
@@ -36,6 +38,7 @@ int main(int argc, char **argv)
     }
     
     int generation_count = 1;
+    start = clock();
     do
     {
       /* 2. Crossover the genomes of each critter with each other*/
@@ -74,19 +77,30 @@ int main(int argc, char **argv)
       {
         free(generation[i]);
       }
+      free(generation);
 
       ++generation_count;
       ++seed;
       printf("\n Best of generation %d | ", generation_count);
-      print_critter(generation[0]);
+      print_critter(population[0]);
 
     /* Repeat the breeding process until the program reaches the target sum */
 
     } while(population[0]->fitness < INFINITY);
+    end = clock();
+    double sec_elapsed = ((double) (end - start)) / CLOCKS_PER_SEC;
 
-    char * process = process_gene(population[0]->gene);
-    struct node *root = build_tree(process, 0, str_length(process) - 1);
-    printf("\nFound in %d generations\nEquation: %s, Sum: %.1f, Target: %d\n", generation_count, process_gene(population[0]->gene), sum_tree(root), sum_target);
+    char * processed = process_gene(population[0]->gene);
+    struct node *root = build_tree(processed, 0, str_length(processed) - 1);
+    printf("\nProcessed %d generations in %lf seconds\nEquation: %s, Sum: %.1f, Target: %d\n", generation_count, sec_elapsed, processed, sum_tree(root), sum_target);
+    free(processed);
+    delete_tree(root);
+    free(population);
+
+    for(int i=0;i<POPULATION_SIZE;++i)
+    {
+        free(population[i]);
+    }
 
 
     return 0;
