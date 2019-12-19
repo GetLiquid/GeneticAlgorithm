@@ -36,6 +36,10 @@ struct critter * crossover(struct critter *a, struct critter *b)
     
     c->gene &= swap_index;
     c->gene |= (~swap_index & b->gene);
+
+    uint64_t mutate = 1 << rand()%63;
+    c->gene ^= mutate;
+
     c->fitness = fitness(c->gene);
     char *temp = process_gene(c->gene);
     for(int i=0;i<16;++i)
