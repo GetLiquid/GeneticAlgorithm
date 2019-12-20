@@ -52,19 +52,12 @@ int main(int argc, char **argv)
         {
           //breed population[i] with population[j] and store in generation
           generation[i * POPULATION_SIZE + j] = crossover(population[i], population[j], sum_target);
-          //print_critter(generation[i*POPULATION_SIZE+j]);
         }
       }
 
       /* 3. Sort the offspring by fitness to choose the POPULATION_SIZE best genomes to be bred again */
-
+      
       merge_sort(generation, 0, POPULATION_SIZE * POPULATION_SIZE - 1, POPULATION_SIZE * POPULATION_SIZE);
-      /*printf("best in generation (size %d): \n", POPULATION_SIZE * POPULATION_SIZE);
-      for(int i=0; i < POPULATION_SIZE;++i)
-      {
-          print_critter(generation[i]);
-      }*/
-
 
       /* 4. The fittest offspring become the parents of the next generation */
 
@@ -82,7 +75,7 @@ int main(int argc, char **argv)
       ++generation_count;
       ++seed;
       srand(seed);
-      printf("\n Best of generation %d | ", generation_count);
+      printf("\r Best of generation %d | ", generation_count);
       print_critter(population[0]);
 
     /* Repeat the breeding process until the program reaches the target sum */
