@@ -6,6 +6,7 @@
 int is_number(char);           //returns 1 if char input is a numeric
 int is_operator(char);         //returns 1 if the char input is '+', '-', '*' or '/'
 void print_bitset(uint64_t);   //prints a 64 bit set in binary 4-bit chunks 
+void print_gene(uint64_t);
 int str_length(const char*);   //returns the length of a c-style string
 
 //Fitness function

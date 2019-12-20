@@ -81,6 +81,7 @@ int main(int argc, char **argv)
 
       ++generation_count;
       ++seed;
+      srand(seed);
       printf("\n Best of generation %d | ", generation_count);
       print_critter(population[0]);
 

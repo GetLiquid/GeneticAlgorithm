@@ -24,6 +24,36 @@ void print_bitset(uint64_t in)
     }
 }
 
+void print_gene(uint64_t in)
+{
+    for(int i=0;i<sizeof(in)*2;++i)
+    {
+        uint8_t temp = (uint8_t) (in >> i*4) & 0xF;
+        if(temp < 10)
+            printf("%c", temp + '0');
+        else
+        {
+            switch(temp)
+            {
+                case 0xA:
+                    printf("+");
+                    break;
+                case 0xB:
+                    printf("-");
+                    break;
+                case 0xC:
+                    printf("x");
+                    break;
+                case 0xD:
+                    printf("/");
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+}
+
 int str_length(const char *input)
 {
     int count = 0;
